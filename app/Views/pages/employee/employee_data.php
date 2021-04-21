@@ -25,8 +25,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn btn-outline-primary"><span class="right badge badge-primary"><i class="fas fa-user-plus"></i></span> Add Employee</a>
+                            <a href="/employee/add_employee" class="btn btn-outline-primary"><span class="right badge badge-primary"><i class="fas fa-user-plus"></i></span> Add Employee</a>
                         </div>
+                        <?php if (session()->getFlashdata('msg')) : ?>
+                            <div class="alert alert-success" role="alert">
+                                <?= session()->getFlashdata('msg'); ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -42,16 +47,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>123456</td>
-                                        <td>Collie</td>
-                                        <td>Jakarta, 28 Desember 1991</td>
-                                        <td>123456789876543</td>
-                                        <td>St. Jose, 12</td>
-                                        <td>061445882</td>
-                                        <td>1</td>
-                                    </tr>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($employee_data as $ed) : ?>
+                                        <tr>
+                                            <td scope="row"><?= $i++; ?></td>
+                                            <td><?= $ed['nip']; ?></td>
+                                            <td><?= $ed['full_name']; ?></td>
+                                            <td><?= $ed['place_of_birth']; ?>, <?= $ed['date_of_birth']; ?></td>
+                                            <td><?= $ed['nik']; ?></td>
+                                            <td><?= $ed['address']; ?></td>
+                                            <td><?= $ed['telephone']; ?></td>
+                                            <td class="text-center">
+                                                <a href="" class="btn btn-info btn-sm" alt="info"><i class="fas fa-info-circle"></i></a>
+                                                <button type="submit" class="btn btn-danger btn-sm" alt="delete" onclick="return confirm('apakah anda yakin ?');"><i class="fas fa-trash-alt"></i></button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
