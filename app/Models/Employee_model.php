@@ -13,7 +13,7 @@ class Employee_Model extends Model
 
     protected $allowedFields = [
         'nip', 'nik', 'full_name', 'gender', 'place_of_birth', 'date_of_birth', 'telephone', 'religion', 'marital_status', 'address',
-        'neighborhood_association', 'citizens_association', 'sub_district', 'district', 'blood_group', 'nationality', 'last_education', 'majors', 'email', 'tax_id_number',
+        'neighborhood', 'hamlet', 'urban_village', 'sub_district', 'regency', 'province', 'zip', 'blood_group', 'nationality', 'last_education', 'majors', 'email', 'tax_id_number',
         'reference', 'photos', 'emergency_contact', 'contact_name', 'relation', 'hired_date'
     ];
 
@@ -23,8 +23,9 @@ class Employee_Model extends Model
     {
         if ($employee_id == false) {
             return $this->orderBy('employee_id', 'DESC')->findAll();
-        } else {
-            return $this->where(['employee_id', $employee_id])->first();
+            // return $this->findAll();
         }
+
+        return $this->where(['employee_id' => $employee_id])->first();
     }
 }
